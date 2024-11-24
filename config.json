@@ -21,6 +21,7 @@
     "data_dir": "dataset/iu_xray/images",
     "limit": -1,
     "strip_path": "datasets/strip_list.pkl",
+    "vocab_path": "datasets/iu_xray_vocabulary.pkl",
     "mode": "train",
     "test_path": "",
     "resume_state": null,

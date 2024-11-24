@@ -65,6 +65,7 @@ def parse_args():
     parser.add_argument('--data_dir', type=str, default='dataset/mimic_cxr/images300')
     parser.add_argument('--limit', type=int, default=-1)
     parser.add_argument('--strip_path', type=str, default='datasets/strip_list.pkl')
+    parser.add_argument('--vocab_path', type=str, default='datasets/iu_xray_vocabulary.pkl')
 
     # Mode settings
     parser.add_argument('--mode', type=str, default="train")
