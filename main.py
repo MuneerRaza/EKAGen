@@ -140,6 +140,7 @@ def main(config):
         if os.path.exists(config.test_path):
             weights_dict = torch.load(config.test_path, map_location='cpu', weights_only=False)['model']
             model.load_state_dict(weights_dict, strict=False)
+            model.to(device)
 
         print("Start Testing..")
         test_result = evaluate(model, detector, criterion, data_loader_test, device, config,
