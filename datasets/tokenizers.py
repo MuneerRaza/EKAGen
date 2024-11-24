@@ -4,17 +4,17 @@ import re
 from collections import Counter
 import pickle
 
-with open('/kaggle/working/EKAGen/datasets/strip_list.pkl', 'rb') as file:
-    strip = pickle.load(file)
-
 
 class Tokenizer(object):
-    def __init__(self, ann_path, threshold, dataset_name, max_length=128):
+    def __init__(self, strip_path, ann_path, threshold, dataset_name, max_length=128):
         self.ann_path = ann_path
         self.threshold = threshold
         self.dataset_name = dataset_name
         self.vocabulary_path = os.path.join("/kaggle/working/EKAGen/datasets", self.dataset_name + "_vocabulary.pkl")
         self.max_length = max_length
+
+        with open(strip_path, 'rb') as file:
+            strip = pickle.load(file)
 
         if self.dataset_name == 'iu_xray':
             self.clean_report = self.clean_report_iu_xray
