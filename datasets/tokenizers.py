@@ -10,7 +10,7 @@ class Tokenizer(object):
         self.ann_path = ann_path
         self.threshold = threshold
         self.dataset_name = dataset_name
-        self.vocabulary_path = os.path.join("/kaggle/working/EKAGen/datasets", self.dataset_name + "_vocabulary.pkl")
+        self.vocabulary_path = os.path.join("datasets", self.dataset_name + "_vocabulary.pkl")
         self.max_length = max_length
 
         with open(strip_path, 'rb') as file:
