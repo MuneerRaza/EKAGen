@@ -35,7 +35,7 @@ def build_tmodel(config, device):
     return tmodel
 
 
-def main(config):
+def main():
     config = parse_args()
     print(config)
     device = torch.device(config.device)
