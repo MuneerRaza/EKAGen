@@ -126,13 +126,14 @@ def main():
                 config.clip_max_norm, thresholds=thresholds, tokenizer=dataset_train.tokenizer, config=config)
             lr_scheduler.step()
             print(f"Training Loss: {epoch_loss}")
+            if x_epoch % config.save_freq == 0:
 
-            torch.save({
-                'model': model.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'lr_scheduler': lr_scheduler.state_dict(),
-                'epoch': epoch,
-            }, config.model_dir + "/" + config.dataset_name + "_weight_epoch" + str(epoch) + "_.pth")
+                torch.save({
+                    'model': model.state_dict(),
+                    'optimizer': optimizer.state_dict(),
+                    'lr_scheduler': lr_scheduler.state_dict(),
+                    'epoch': epoch,
+                }, config.model_dir + "/" + config.dataset_name + "_weight_epoch" + str(epoch) + "_.pth")
             
             if x_epoch % config.validation_freq == 0:
                 validate_result = evaluate(model, detector, criterion, data_loader_val, device, config,

@@ -12,6 +12,7 @@ def parse_args():
     parser.add_argument('--weight_decay', type=float, default=1e-4)
     parser.add_argument('--validation_freq', type=int, default=1)
     parser.add_argument('--test_freq', type=int, default=1)
+    parser.add_argument('--save_freq', type=int, default=1)
     parser.add_argument('--model_dir', type=str, default='resume_state')
 
     # Backbone settings
