@@ -70,6 +70,7 @@ def parse_args():
     parser.add_argument('--mode', type=str, default="train")
     parser.add_argument('--model_path', type=str, default="")
     parser.add_argument('--resume_state', type=str, default=None)
+    parser.add_argument('--config', type=str, default=None)
 
     # Dataset-specific lengths
     parser.add_argument('--train_len', type=int, default=-1)

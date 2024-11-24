@@ -26,6 +26,5 @@
     "resume_state": null,
     "train_len": 500,
     "val_len": 10,
-    "test_len": -1,
-    "config": null
+    "test_len": -1
 }
