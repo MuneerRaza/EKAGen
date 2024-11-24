@@ -10,6 +10,10 @@ from utils.engine import train_one_epoch, evaluate
 from models.model import swin_tiny_patch4_window7_224 as create_model
 from utils.stloss import SoftTarget
 import re
+import warnings
+
+warnings.filterwarnings("ignore", category=FutureWarning, message="Support for mismatched key_padding_mask and attn_mask is deprecated")
+
 
 
 def build_diagnosisbot(num_classes, detector_weight_path):
