@@ -62,7 +62,7 @@ transform_class = tv.transforms.Compose([
 class XrayDataset(Dataset):
     def __init__(self, root, ann, max_length, limit, transform=None, transform_class=transform_class,
                  mode='training', data_dir=None, dataset_name=None, image_size=None,
-                 theta=None, gamma=None, beta=None, length=None, strip_path=None):
+                 theta=None, gamma=None, beta=None, length=None, strip_path=None, vocab_path=None):
         super().__init__()
 
         self.root = root
@@ -86,7 +86,7 @@ class XrayDataset(Dataset):
         elif dataset_name == "iu_xray":
             threshold = 3
         self.data_name = dataset_name
-        self.tokenizer = Tokenizer(strip_path=strip_path, ann_path=root, threshold=threshold, dataset_name=dataset_name)
+        self.tokenizer = Tokenizer(strip_path=strip_path, vocab_path=vocab_path, ann_path=root, threshold=threshold, dataset_name=dataset_name)
         self.max_length = max_length + 1
 
     def _process(self, image_id):
@@ -163,7 +163,8 @@ def build_dataset(config, mode='training', anno_path=None, data_dir=None, datase
             train_file)["train"], max_length=config.max_position_embeddings, limit=config.limit,
                            transform=train_transform,
                            mode='training', data_dir=data_dir, dataset_name=dataset_name, image_size=image_size,
-                           theta=theta, gamma=gamma, beta=beta, length=config.train_len, strip_path=config.strip_path)
+                           theta=theta, gamma=gamma, beta=beta, length=config.train_len, strip_path=config.strip_path,
+                           vocab_path=config.vocab_path)
         return data
 
     elif mode == 'validation':
@@ -171,14 +172,16 @@ def build_dataset(config, mode='training', anno_path=None, data_dir=None, datase
         data = XrayDataset(val_file, read_json(
             val_file)["val"], max_length=config.max_position_embeddings, limit=config.limit, transform=val_transform,
                            mode='validation', data_dir=data_dir, dataset_name=dataset_name, image_size=image_size,
-                           theta=theta, gamma=gamma, beta=beta, length=config.val_len, strip_path=config.strip_path)
+                           theta=theta, gamma=gamma, beta=beta, length=config.val_len, strip_path=config.strip_path,
+                           vocab_path=config.vocab_path)
         return data
     elif mode == 'test':
         test_file = anno_path
         data = XrayDataset(test_file, read_json(
             test_file)["test"], max_length=config.max_position_embeddings, limit=config.limit, transform=val_transform,
                            mode='test', data_dir=data_dir, dataset_name=dataset_name, image_size=image_size,
-                           theta=theta, gamma=gamma, beta=beta, length=config.test_len, strip_path=config.strip_path)
+                           theta=theta, gamma=gamma, beta=beta, length=config.test_len, strip_path=config.strip_path,
+                           vocab_path=config.vocab_path)
         return data
     else:
         raise NotImplementedError(f"{mode} not supported")

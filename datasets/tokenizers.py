@@ -6,11 +6,11 @@ import pickle
 
 
 class Tokenizer(object):
-    def __init__(self, strip_path, ann_path, threshold, dataset_name, max_length=128):
+    def __init__(self, strip_path, vocab_path, ann_path, threshold, dataset_name, max_length=128):
         self.ann_path = ann_path
         self.threshold = threshold
         self.dataset_name = dataset_name
-        self.vocabulary_path = os.path.join("datasets", self.dataset_name + "_vocabulary.pkl")
+        self.vocabulary_path = os.path.join(vocab_path, self.dataset_name + "_vocabulary.pkl")
         self.max_length = max_length
 
         with open(strip_path, 'rb') as file:
