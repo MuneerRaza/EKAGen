@@ -16,6 +16,8 @@ class Tokenizer(object):
         with open(strip_path, 'rb') as file:
             strip = pickle.load(file)
 
+        self.strip = strip
+
         if self.dataset_name == 'iu_xray':
             self.clean_report = self.clean_report_iu_xray
         else:
@@ -35,7 +37,7 @@ class Tokenizer(object):
             for token in tokens:
                 total_tokens.append(token)
 
-        total_tokens = [item for item in total_tokens if item not in strip]
+        total_tokens = [item for item in total_tokens if item not in self.strip]
 
         counter = Counter(total_tokens)
         vocab = [k for k, v in counter.items() if v >= self.threshold] + ['<unk>']
